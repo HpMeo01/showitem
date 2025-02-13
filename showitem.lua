@@ -22,7 +22,7 @@ local function getMastery()
     local masteryData = {}
     for _, tool in pairs(inventory:GetChildren()) do
         if tool:IsA("Tool") and tool:FindFirstChild("Mastery") then
-            masteryData[tool.Name] = tool.Mastery.Value
+            masteryData[tool.Name] = tool.Mastery.Level.Value
         end
     end
     return masteryData
@@ -34,7 +34,7 @@ local function displayAccountInfo()
 
     local frame = Instance.new("Frame", gui)
     frame.Size = UDim2.new(0, 500, 0, 400)
-    frame.Position = UDim2.new(0.5, -250, 0.2, 0)
+    frame.Position = UDim2.new(0.5, -250, 0, 0) -- Kéo lên trên cùng
     frame.BackgroundTransparency = 0.3
     frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
     frame.BorderSizePixel = 2
@@ -74,7 +74,7 @@ local function displayAccountInfo()
     )
 
     for _, item in pairs(items) do
-        local masteryLevel = mastery[item] or "None"
+        local masteryLevel = mastery[item] or "No Mastery Data"
         displayText = displayText .. string.format("- %s (Mastery: %s)\n", item, masteryLevel)
     end
 
@@ -82,4 +82,3 @@ local function displayAccountInfo()
 end
 
 displayAccountInfo()
-
